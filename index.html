@@ -3,81 +3,199 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Universal File Converter</title>
+    <meta name="description" content="Free online file converter tool." id="meta-desc">
+    <title id="page-title">Universal File Converter</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="canonical" href="" id="canonical-link">
 </head>
-<body class="bg-gray-100 text-gray-900 font-sans">
+<body class="bg-slate-50 text-slate-900 font-sans min-h-screen flex flex-col">
 
-    <nav class="bg-white shadow p-4">
-        <div class="max-w-xl mx-auto font-bold text-xl text-blue-600">
-            FastConvert <span class="text-gray-400 text-sm">/ Free Online Tool</span>
+    <nav class="bg-white shadow-sm border-b border-slate-200">
+        <div class="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="/" class="text-xl font-bold text-blue-600 tracking-tight">Convert<span class="text-slate-800">Fast</span></a>
+            <span class="text-xs font-medium bg-blue-100 text-blue-800 px-2 py-1 rounded">v2.0 Beta</span>
         </div>
     </nav>
 
-    <main class="max-w-xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg text-center">
-        <h1 id="tool-title" class="text-3xl font-bold mb-4">File Converter</h1>
-        <p id="tool-desc" class="text-gray-600 mb-8">Convert your files instantly in the browser.</p>
-
-        <div class="border-2 border-dashed border-blue-300 bg-blue-50 p-10 rounded-lg cursor-pointer hover:bg-blue-100 transition relative">
-            <input type="file" id="fileInput" class="absolute inset-0 opacity-0 cursor-pointer" onchange="processFile(event)">
-            <p class="font-bold text-blue-600">Click to Upload File</p>
-            <p class="text-xs text-gray-500 mt-2">Processed locally. 100% Private.</p>
+    <main class="flex-grow max-w-3xl mx-auto w-full px-4 pt-12 pb-20">
+        <div class="text-center mb-10">
+            <h1 id="main-h1" class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4 tracking-tight">File Converter</h1>
+            <p id="main-p" class="text-lg text-slate-600 max-w-2xl mx-auto">Convert your files instantly. No upload limits. 100% Free.</p>
         </div>
-        
-        <div id="status" class="hidden mt-4 text-green-600 font-bold">Processing...</div>
+
+        <div class="bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden">
+            <div class="p-8 md:p-12 text-center">
+                
+                <div id="drop-zone" class="border-2 border-dashed border-slate-300 rounded-xl bg-slate-50 hover:bg-blue-50 hover:border-blue-400 transition-all cursor-pointer p-10 group relative">
+                    <input type="file" id="fileInput" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" onchange="handleFile(this)">
+                    
+                    <div class="space-y-4 pointer-events-none">
+                        <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-transform">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-slate-800">Click to Upload Image</h3>
+                        <p class="text-sm text-slate-500">Supports PNG, JPG, WEBP. <br>Processed privately in your browser.</p>
+                    </div>
+                </div>
+
+                <div id="result-area" class="hidden mt-8 p-4 bg-green-50 border border-green-200 rounded-lg animate-fade-in">
+                    <p class="text-green-700 font-medium mb-3">✅ Conversion Successful!</p>
+                    <a id="download-btn" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-green-600 hover:bg-green-700 shadow-sm transition-all" download>
+                        Download Converted File
+                    </a>
+                </div>
+
+            </div>
+            
+            <div class="bg-slate-50 p-8 border-t border-slate-100 text-left">
+                <h2 class="text-lg font-bold text-slate-800 mb-2">How to use this tool?</h2>
+                <p id="seo-text" class="text-slate-600 text-sm leading-relaxed">
+                    Our fast converter allows you to change file formats in seconds without installing software.
+                </p>
+            </div>
+        </div>
     </main>
 
-    <footer class="max-w-xl mx-auto mt-12 mb-10">
-        <h3 class="text-gray-500 font-bold text-sm uppercase mb-4">Popular Tools</h3>
-        <div id="link-list" class="grid grid-cols-2 gap-2 text-sm text-blue-500 underline">
+    <footer class="bg-white border-t border-slate-200 mt-auto">
+        <div class="max-w-5xl mx-auto px-4 py-12">
+            <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-6">Popular Conversions</h4>
+            <div id="footer-links" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3 text-sm">
+                </div>
+            <div class="mt-12 pt-8 border-t border-slate-100 text-center text-slate-400 text-sm">
+                &copy; 2026 ConvertFast Tools.
             </div>
+        </div>
     </footer>
 
-    <script>
-        // --- A. THE DATABASE (Add as many tools as you want here) ---
-        const tools = {
-            'png-to-jpg': { title: 'Convert PNG to JPG', desc: 'Turn PNG images into high-quality JPGs.' },
-            'jpg-to-png': { title: 'Convert JPG to PNG', desc: 'Turn JPG images into transparent PNGs.' },
-            'webp-to-jpg': { title: 'WEBP to JPG Converter', desc: 'Fix WEBP files by making them JPG.' },
-            'heic-to-jpg': { title: 'HEIC to JPG Converter', desc: 'Convert iPhone photos to standard JPG.' }
-        };
+<script>
+    // --- 1. CONFIGURATION (The "100 Pages" Logic) ---
+    // You can add more items here later.
+    const tools = {
+        'png-to-jpg': { 
+            title: 'Convert PNG to JPG', 
+            h1: 'Free PNG to JPG Converter',
+            desc: 'Convert transparent PNGs to high-quality JPG images instantly.',
+            mime: 'image/jpeg', 
+            ext: 'jpg' 
+        },
+        'jpg-to-png': { 
+            title: 'Convert JPG to PNG', 
+            h1: 'Free JPG to PNG Converter',
+            desc: 'Turn JPG images into PNG format online.',
+            mime: 'image/png', 
+            ext: 'png' 
+        },
+        'webp-to-jpg': { 
+            title: 'Convert WEBP to JPG', 
+            h1: 'WEBP to JPG Bulk Converter',
+            desc: 'Fix WEBP files by converting them to standard JPG format.',
+            mime: 'image/jpeg', 
+            ext: 'jpg' 
+        },
+        'webp-to-png': { 
+            title: 'Convert WEBP to PNG', 
+            h1: 'WEBP to PNG Tool',
+            desc: 'Convert Google WEBP images to PNG format.',
+            mime: 'image/png', 
+            ext: 'png' 
+        },
+        'jpg-to-webp': { 
+            title: 'Convert JPG to WEBP', 
+            h1: 'JPG to WEBP Optimizer',
+            desc: 'Compress your images by converting JPG to WEBP.',
+            mime: 'image/webp', 
+            ext: 'webp' 
+        },
+        'png-to-webp': { 
+            title: 'Convert PNG to WEBP', 
+            h1: 'PNG to WEBP Optimizer',
+            desc: 'Make your PNGs smaller by converting to WEBP.',
+            mime: 'image/webp', 
+            ext: 'webp' 
+        }
+    };
 
-        // --- B. THE ROUTER (Changes the page based on URL) ---
-        function loadPage() {
-            // Get the tool name from the URL (e.g., /png-to-jpg)
-            let path = window.location.pathname.replace('/', '');
+    // --- 2. ROUTER (The Engine) ---
+    function init() {
+        // Get clean path (remove slashes)
+        let path = window.location.pathname.replace(/^\/|\/$/g, '');
+        
+        // Default to first tool if home
+        if (!path) path = 'png-to-jpg';
+        
+        const config = tools[path];
+
+        // If tool exists, update the page
+        if (config) {
+            document.title = config.title + " | ConvertFast";
+            document.getElementById('meta-desc').content = config.desc;
+            document.getElementById('main-h1').innerText = config.h1;
+            document.getElementById('main-p').innerText = config.desc;
+            document.getElementById('seo-text').innerText = `Use our ${config.title} tool to safely process your files. Unlike other sites, we process files locally on your device for maximum privacy.`;
+            document.getElementById('canonical-link').href = window.location.href;
             
-            // If the URL is empty, default to the first tool
-            if(!path) path = 'png-to-jpg';
-
-            // Find the tool in our database
-            const currentTool = tools[path];
-
-            // If tool exists, update the text
-            if (currentTool) {
-                document.getElementById('tool-title').innerText = currentTool.title;
-                document.getElementById('tool-desc').innerText = currentTool.desc;
-                document.title = currentTool.title + " | FastConvert";
-            }
+            // Set global active format
+            window.activeFormat = config;
+        } else {
+            // If page doesn't exist, show generic
+            document.getElementById('main-h1').innerText = "File Converter";
         }
 
-        // --- C. GENERATE LINKS (Creates the footer links) ---
-        const linkContainer = document.getElementById('link-list');
-        for (let key in tools) {
-            linkContainer.innerHTML += `<a href="/${key}" class="hover:text-blue-700">${tools[key].title}</a>`;
-        }
+        // Generate Footer Links
+        const footer = document.getElementById('footer-links');
+        footer.innerHTML = ''; // clear
+        Object.keys(tools).forEach(key => {
+            footer.innerHTML += `<a href="/${key}" class="text-blue-600 hover:text-blue-800 hover:underline transition-colors block py-1">${tools[key].title}</a>`;
+        });
+    }
 
-        // Run the router when page loads
-        loadPage();
+    // --- 3. CONVERTER LOGIC (Client Side) ---
+    function handleFile(input) {
+        const file = input.files[0];
+        if (!file) return;
 
-        // --- D. DUMMY CONVERSION (Visual only for now) ---
-        function processFile(event) {
-            document.getElementById('status').classList.remove('hidden');
-            setTimeout(() => {
-                alert("File received! (Add real conversion logic here later)");
-                document.getElementById('status').classList.add('hidden');
-            }, 1000);
-        }
-    </script>
+        // Visual feedback
+        const btn = input.parentElement;
+        btn.innerHTML = `<p class="text-blue-600 font-bold animate-pulse">Converting...</p>`;
+
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            const img = new Image();
+            img.onload = function() {
+                // Create Canvas
+                const canvas = document.createElement('canvas');
+                canvas.width = img.width;
+                canvas.height = img.height;
+                const ctx = canvas.getContext('2d');
+                
+                // Draw white background (fixes transparent PNG to JPG black background issue)
+                ctx.fillStyle = '#FFFFFF';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                // Draw Image
+                ctx.drawImage(img, 0, 0);
+
+                // Convert
+                const format = window.activeFormat || tools['png-to-jpg'];
+                const dataUrl = canvas.toDataURL(format.mime, 0.9);
+
+                // Show Download
+                document.getElementById('result-area').classList.remove('hidden');
+                const dlBtn = document.getElementById('download-btn');
+                dlBtn.href = dataUrl;
+                dlBtn.download = `converted-file.${format.ext}`;
+
+                // Reset Upload UI
+                btn.innerHTML = `<h3 class="text-xl font-semibold text-slate-800">Convert Another?</h3>`;
+                input.value = ''; // clear input to allow same file again
+            };
+            img.src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+
+    // Run on Load
+    init();
+</script>
 </body>
 </html>
