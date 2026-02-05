@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal File Converter</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-900 font-sans">
+
+    <nav class="bg-white shadow p-4">
+        <div class="max-w-xl mx-auto font-bold text-xl text-blue-600">
+            FastConvert <span class="text-gray-400 text-sm">/ Free Online Tool</span>
+        </div>
+    </nav>
+
+    <main class="max-w-xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg text-center">
+        <h1 id="tool-title" class="text-3xl font-bold mb-4">File Converter</h1>
+        <p id="tool-desc" class="text-gray-600 mb-8">Convert your files instantly in the browser.</p>
+
+        <div class="border-2 border-dashed border-blue-300 bg-blue-50 p-10 rounded-lg cursor-pointer hover:bg-blue-100 transition relative">
+            <input type="file" id="fileInput" class="absolute inset-0 opacity-0 cursor-pointer" onchange="processFile(event)">
+            <p class="font-bold text-blue-600">Click to Upload File</p>
+            <p class="text-xs text-gray-500 mt-2">Processed locally. 100% Private.</p>
+        </div>
+        
+        <div id="status" class="hidden mt-4 text-green-600 font-bold">Processing...</div>
+    </main>
+
+    <footer class="max-w-xl mx-auto mt-12 mb-10">
+        <h3 class="text-gray-500 font-bold text-sm uppercase mb-4">Popular Tools</h3>
+        <div id="link-list" class="grid grid-cols-2 gap-2 text-sm text-blue-500 underline">
+            </div>
+    </footer>
+
+    <script>
+        // --- A. THE DATABASE (Add as many tools as you want here) ---
+        const tools = {
+            'png-to-jpg': { title: 'Convert PNG to JPG', desc: 'Turn PNG images into high-quality JPGs.' },
+            'jpg-to-png': { title: 'Convert JPG to PNG', desc: 'Turn JPG images into transparent PNGs.' },
+            'webp-to-jpg': { title: 'WEBP to JPG Converter', desc: 'Fix WEBP files by making them JPG.' },
+            'heic-to-jpg': { title: 'HEIC to JPG Converter', desc: 'Convert iPhone photos to standard JPG.' }
+        };
+
+        // --- B. THE ROUTER (Changes the page based on URL) ---
+        function loadPage() {
+            // Get the tool name from the URL (e.g., /png-to-jpg)
+            let path = window.location.pathname.replace('/', '');
+            
+            // If the URL is empty, default to the first tool
+            if(!path) path = 'png-to-jpg';
+
+            // Find the tool in our database
+            const currentTool = tools[path];
+
+            // If tool exists, update the text
+            if (currentTool) {
+                document.getElementById('tool-title').innerText = currentTool.title;
+                document.getElementById('tool-desc').innerText = currentTool.desc;
+                document.title = currentTool.title + " | FastConvert";
+            }
+        }
+
+        // --- C. GENERATE LINKS (Creates the footer links) ---
+        const linkContainer = document.getElementById('link-list');
+        for (let key in tools) {
+            linkContainer.innerHTML += `<a href="/${key}" class="hover:text-blue-700">${tools[key].title}</a>`;
+        }
+
+        // Run the router when page loads
+        loadPage();
+
+        // --- D. DUMMY CONVERSION (Visual only for now) ---
+        function processFile(event) {
+            document.getElementById('status').classList.remove('hidden');
+            setTimeout(() => {
+                alert("File received! (Add real conversion logic here later)");
+                document.getElementById('status').classList.add('hidden');
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
