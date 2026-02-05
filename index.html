@@ -1,165 +1,141 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" id="meta-desc" content="Free online file converter.">
-    <title id="page-title">File Converter</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <title id="page-title">Loading Tool...</title>
+    <meta name="description" id="meta-desc" content="Free online tool.">
+    <link rel="canonical" href="" id="canonical-link">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
-        .gradient-text { background: linear-gradient(to right, #2563eb, #9333ea); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .upload-box:hover { border-color: #2563eb; background-color: #eff6ff; }
+        /* --- YOUR LUXURY THEME VARIABLES --- */
+        :root { 
+            --bg-body: #09090b;        
+            --bg-card: #0c0c0e;        
+            --primary: #f59e0b;       /* Gold */
+            --text-main: #ededef;
+            --text-muted: #a1a1aa;
+            --border: #1f1f22;
+        }
+
+        body { background: var(--bg-body); color: var(--text-main); font-family: 'Inter', sans-serif; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+        
+        /* Nav */
+        nav { padding: 20px 30px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-weight: 700; font-size: 1.1rem; display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-main); }
+        .logo i { color: black; background: var(--primary); padding: 6px; border-radius: 6px; font-size: 0.9rem; }
+        
+        /* Main Tool Area */
+        main { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 60px 20px; text-align: center; }
+        
+        h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 10px; letter-spacing: -0.02em; }
+        p.subtitle { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin-bottom: 40px; }
+
+        /* The Upload Box */
+        .tool-box { 
+            background: var(--bg-card); 
+            border: 2px dashed var(--border); 
+            border-radius: 16px; 
+            padding: 60px; 
+            width: 100%; 
+            max-width: 600px; 
+            cursor: pointer; 
+            transition: 0.3s;
+            position: relative;
+        }
+        .tool-box:hover { border-color: var(--primary); transform: translateY(-5px); }
+        .tool-box i { font-size: 3rem; color: var(--primary); margin-bottom: 20px; }
+        .tool-box h3 { font-size: 1.2rem; font-weight: 600; }
+        
+        /* SEO Footer Section */
+        .seo-section { max-width: 800px; margin-top: 80px; text-align: left; border-top: 1px solid var(--border); padding-top: 40px; }
+        .seo-section h2 { color: var(--primary); font-size: 1.2rem; margin-bottom: 15px; }
+        .seo-section p { color: var(--text-muted); line-height: 1.6; }
+
+        /* The 100 Links Grid */
+        .link-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; margin-top: 20px; }
+        .link-grid a { color: var(--text-muted); font-size: 0.85rem; text-decoration: none; transition: 0.2s; padding: 5px; border-radius: 4px; }
+        .link-grid a:hover { color: var(--primary); background: rgba(245, 158, 11, 0.1); }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans flex flex-col min-h-screen">
+<body>
 
-    <nav class="bg-white border-b border-gray-200 py-4">
-        <div class="max-w-4xl mx-auto px-6 flex justify-between items-center">
-            <a href="/" class="text-xl font-bold tracking-tight">
-                <i class="fa-solid fa-bolt text-blue-600"></i> Fast<span class="text-blue-600">Convert</span>
-            </a>
-            <span class="text-xs font-semibold bg-blue-100 text-blue-700 px-3 py-1 rounded-full">v1.0 Free</span>
-        </div>
+    <nav>
+        <a href="index.html" class="logo"><i class="fa-solid fa-layer-group"></i> OmniTools</a>
+        <a href="index.html" style="color: var(--text-muted); text-decoration: none; font-size: 0.9rem;"><i class="fa-solid fa-arrow-left"></i> Dashboard</a>
     </nav>
 
-    <main class="flex-grow flex flex-col items-center justify-center px-4 py-12">
-        
-        <div class="text-center mb-10 max-w-2xl">
-            <h1 id="dynamic-h1" class="text-4xl md:text-5xl font-extrabold mb-4 text-gray-900">
-                Universal File Converter
-            </h1>
-            <p id="dynamic-desc" class="text-lg text-gray-500">
-                Convert your files instantly. No limits.
-            </p>
+    <main>
+        <h1 id="dynamic-h1">Tool Loading...</h1>
+        <p class="subtitle" id="dynamic-desc">Please wait...</p>
+
+        <div class="tool-box" onclick="document.getElementById('fileInput').click()">
+            <input type="file" id="fileInput" hidden onchange="fakeProcess()">
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+            <h3>Click to Upload File</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 10px;">Processed locally. 100% Private.</p>
         </div>
 
-        <div class="w-full max-w-xl bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden p-8">
+        <div id="status" style="display:none; margin-top: 20px; color: #4ade80; font-weight: 600;">
+            <i class="fa-solid fa-circle-notch fa-spin"></i> Processing...
+        </div>
+
+        <div class="seo-section">
+            <h2>About this Tool</h2>
+            <p id="seo-text">This tool allows you to process your files directly in the browser.</p>
             
-            <div id="drop-zone" class="upload-box border-2 border-dashed border-gray-300 rounded-xl p-10 text-center cursor-pointer transition-all relative group">
-                <input type="file" id="fileInput" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" onchange="handleFile(this)">
-                
-                <div class="pointer-events-none">
-                    <i class="fa-solid fa-cloud-arrow-up text-4xl text-blue-500 mb-4 group-hover:scale-110 transition-transform"></i>
-                    <h3 class="text-xl font-bold text-gray-700">Choose File</h3>
-                    <p class="text-sm text-gray-400 mt-2" id="format-hint">Supports PNG, JPG, WEBP, PDF</p>
+            <h4 style="margin-top: 30px; margin-bottom: 15px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-main);">Related Tools</h4>
+            <div class="link-grid" id="footer-links">
                 </div>
-            </div>
-
-            <div id="result-area" class="hidden mt-6 text-center">
-                <div class="animate-pulse flex justify-center items-center gap-2 text-blue-600 font-semibold mb-4">
-                    <i class="fa-solid fa-circle-notch fa-spin"></i> Processing...
-                </div>
-            </div>
-
-            <a id="download-btn" class="hidden block w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl text-center transition-all shadow-lg shadow-blue-200">
-                Download Converted File
-            </a>
-
         </div>
-
-        <article class="max-w-2xl mt-16 prose text-gray-500">
-            <h2 class="text-2xl font-bold text-gray-800 mb-4">How to use this tool?</h2>
-            <p id="seo-text">
-                This secure online tool allows you to process your files directly in the browser. 
-                We do not upload your data to any server, ensuring 100% privacy.
-            </p>
-        </article>
-
     </main>
 
-    <footer class="bg-white border-t border-gray-200 py-12 mt-auto">
-        <div class="max-w-5xl mx-auto px-6">
-            <h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-6">Popular Conversions</h4>
-            
-            <div id="link-grid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3 text-sm">
-                </div>
-
-            <div class="mt-10 text-center text-gray-400 text-xs">
-                &copy; 2026 FastConvert. All rights reserved.
-            </div>
-        </div>
-    </footer>
-
     <script>
-        // --- A. THE 100+ PAGE DATABASE ---
-        // Just add a line here to create a NEW page.
-        const tools = {
-            // IMAGES
-            'png-to-jpg': { title: 'Convert PNG to JPG', desc: 'Turn transparent PNGs into standard JPG images.', ext: 'jpg', mime: 'image/jpeg' },
-            'jpg-to-png': { title: 'Convert JPG to PNG', desc: 'Turn JPG photos into PNG format.', ext: 'png', mime: 'image/png' },
-            'webp-to-jpg': { title: 'WEBP to JPG Converter', desc: 'Fix WEBP files by converting to JPG.', ext: 'jpg', mime: 'image/jpeg' },
-            'heic-to-jpg': { title: 'HEIC to JPG Converter', desc: 'Convert iPhone HEIC photos to JPG.', ext: 'jpg', mime: 'image/jpeg' },
-            'bmp-to-png':  { title: 'BMP to PNG Converter', desc: 'Convert old BMP bitmaps to modern PNG.', ext: 'png', mime: 'image/png' },
-            
-            // DOCUMENTS (Mock logic for example)
-            'word-to-pdf': { title: 'Word to PDF', desc: 'Convert DOCX documents to PDF instantly.', ext: 'pdf', mime: 'application/pdf' },
-            'pdf-to-txt':  { title: 'PDF to Text', desc: 'Extract text from your PDF files.', ext: 'txt', mime: 'text/plain' },
-            'excel-to-pdf':{ title: 'Excel to PDF', desc: 'Save your spreadsheets as PDF documents.', ext: 'pdf', mime: 'application/pdf' },
-            
-            // RESIZING / UTILS
-            'compress-png':{ title: 'Compress PNG', desc: 'Reduce PNG file size without losing quality.', action: 'compress' },
-            'resize-image':{ title: 'Resize Image', desc: 'Change image dimensions online.', action: 'resize' }
+        // --- 1. THE 100+ PAGE DATABASE (Add your 100 items here) ---
+        const pageDB = {
+            'png-to-jpg': { title: 'PNG to JPG Converter', desc: 'Convert transparent PNG images to JPG format.' },
+            'jpg-to-png': { title: 'JPG to PNG Converter', desc: 'Turn JPG images into PNGs instantly.' },
+            'webp-to-jpg': { title: 'WEBP to JPG Converter', desc: 'Fix WEBP files by converting to JPG.' },
+            'pdf-to-word': { title: 'PDF to Word Converter', desc: 'Convert PDF documents to editable Word files.' },
+            'word-to-pdf': { title: 'Word to PDF Converter', desc: 'Save DOCX files as PDF documents.' },
+            'heic-to-jpg': { title: 'HEIC to JPG Converter', desc: 'Convert iPhone photos to standard JPG.' }
+            // COPY PASTE MORE LINES HERE...
         };
 
-        // --- B. THE ROUTER (Changes content based on URL) ---
+        // --- 2. THE CHAMELEON LOGIC ---
         function init() {
-            // 1. Get the "slug" from URL (e.g., /png-to-jpg)
-            let slug = window.location.pathname.replace(/^\/|\/$/g, '');
-            if (!slug) slug = 'png-to-jpg'; // Default Homepage
+            // Get URL slug (e.g., "png-to-jpg")
+            let slug = window.location.pathname.replace(/^\/|\/$/g, '').replace('.html', '');
+            
+            // If page doesn't exist in DB, default to first one
+            if (!pageDB[slug]) slug = 'png-to-jpg';
 
-            // 2. Find tool in database
-            const info = tools[slug];
+            const data = pageDB[slug];
 
-            if (info) {
-                // 3. Update the page text (The "Chameleon" Effect)
-                document.title = info.title + " | FastConvert";
-                document.getElementById('meta-desc').content = info.desc;
-                document.getElementById('dynamic-h1').innerText = info.title;
-                document.getElementById('dynamic-desc').innerText = info.desc;
-                document.getElementById('seo-text').innerText = `Our free ${info.title} tool is the fastest way to ${info.desc.toLowerCase()} It works on Windows, Mac, and Mobile.`;
-                
-                // Save current tool to global variable for the converter to use
-                window.currentTool = info;
-            }
+            // Update Page Content
+            document.title = data.title + " | OmniTools";
+            document.getElementById('meta-desc').content = data.desc;
+            document.getElementById('canonical-link').href = window.location.href;
+            document.getElementById('dynamic-h1').innerText = data.title;
+            document.getElementById('dynamic-desc').innerText = data.desc;
+            document.getElementById('seo-text').innerText = `Use our free ${data.title} to ${data.desc.toLowerCase()} It is fast, secure, and runs entirely in your browser.`;
 
-            // 4. Generate the 100+ Links in Footer
-            const grid = document.getElementById('link-grid');
-            Object.keys(tools).forEach(key => {
-                grid.innerHTML += `<a href="/${key}" class="text-blue-600 hover:text-blue-800 hover:underline block p-1">${tools[key].title}</a>`;
+            // Build Footer Links
+            const grid = document.getElementById('footer-links');
+            Object.keys(pageDB).forEach(key => {
+                grid.innerHTML += `<a href="/${key}">${pageDB[key].title}</a>`;
             });
         }
 
-        // --- C. CONVERSION LOGIC (Client-Side) ---
-        function handleFile(input) {
-            const file = input.files[0];
-            if (!file) return;
-
-            // Show Loading
-            const resultArea = document.getElementById('result-area');
-            const downloadBtn = document.getElementById('download-btn');
-            resultArea.classList.remove('hidden');
-            resultArea.innerHTML = '<div class="text-blue-600 font-bold"><i class="fa-solid fa-spinner fa-spin"></i> Converting...</div>';
-
-            // SIMULATE CONVERSION (Since browser logic varies per type)
-            // Real logic involves Canvas API (images) or libraries like jsPDF
-            setTimeout(() => {
-                const tool = window.currentTool || tools['png-to-jpg'];
-                
-                // Create a fake result for demo
-                // In real code, here you would use canvas.toDataURL()
-                resultArea.innerHTML = `<div class="text-green-600 font-bold mb-4"><i class="fa-solid fa-check-circle"></i> Done!</div>`;
-                
-                downloadBtn.classList.remove('hidden');
-                downloadBtn.innerText = `Download .${tool.ext.toUpperCase()}`;
-                downloadBtn.href = "#"; // Replace with real blob URL
-                downloadBtn.download = `converted.${tool.ext}`;
-
-            }, 1500); // Fake 1.5s delay
+        function fakeProcess() {
+            document.getElementById('status').style.display = 'block';
+            setTimeout(() => alert("File Received! (Add conversion logic here)"), 1000);
         }
 
-        // Run on load
         init();
     </script>
 </body>
